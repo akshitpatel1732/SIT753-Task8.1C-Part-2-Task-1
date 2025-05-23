@@ -30,8 +30,17 @@ pipeline {
         // --- NEW SONARCLOUD ANALYSIS STAGE ---
         stage('SonarCloud Analysis') {
             steps {
-                withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
-                  sh 'sonar-scanner'
+                script { // Added a script block for better control and clarity
+                    // --- DEBUGGING STEP: List files in the workspace ---
+                    echo "Listing files in current directory before SonarScan:"
+                    sh 'ls -la'
+                    echo "--- End of file listing ---"
+                    // --- END DEBUGGING STEP ---
+
+                    withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
+                        // Explicitly tell sonar-scanner the project base directory
+                        sh 'sonar-scanner -Dsonar.projectBaseDir=$WORKSPACE -Dsonar.login=$SONAR_TOKEN'
+                    }
                 }
             }
         }
