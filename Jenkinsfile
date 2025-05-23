@@ -31,7 +31,7 @@ pipeline {
         stage('SonarCloud Analysis') {
             steps {
                 withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
-                  sh 'sonar-scanner'
+                  sh 'sonar-scanner -Dproject.settings=./sonar-project.properties'
                     // withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
                     //     // Explicitly tell sonar-scanner the project base directory
                     //     sh 'sonar-scanner -Dsonar.projectBaseDir=$WORKSPACE -Dsonar.token=$SONAR_TOKEN -Dsonar.projectKey=akshitpatel1732_SIT753-Task8.1C-Part-2-Task-1 -Dsonar.organization=akshitpatel1732 -Dproject.settings=sonar-project.properties'
