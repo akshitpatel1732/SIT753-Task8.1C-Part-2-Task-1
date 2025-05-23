@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/akshitpatel1732/8.2CDevSecOps.git'
+                git branch: 'main', url: 'https://github.com/akshitpatel1732/SIT753-Task8.1C-Part-2-Task-1.git'
                 // --- NEW DEBUGGING STEP: List files AFTER Git checkout ---
                 echo "Listing files in workspace AFTER Git checkout:"
                 sh 'ls -la'
